@@ -8,6 +8,7 @@ Prefers the `context_window` block from the status-line stdin JSON (Claude Code
 """
 import sys
 import json
+import re
 from datetime import datetime
 
 MAX_TOKENS = 1_000_000
@@ -148,7 +149,10 @@ def main():
     usage = usage_segment(data)
     if usage:
         line += f"  {DIM}│{RESET}  {usage}"
-    sys.stdout.write(line)
+    # tanki zatemnjeni ločilni črti nad in pod vrstico, dolgi kot vrstica
+    width = len(re.sub(r"\033\[[0-9;]*m", "", line))
+    rule = f"{DIM}{'─' * width}{RESET}"
+    sys.stdout.write(f"{rule}\n{line}\n{rule}")
 
 
 if __name__ == "__main__":
