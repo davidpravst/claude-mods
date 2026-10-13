@@ -96,12 +96,12 @@ def usage_color(pct):
 
 
 def format_reset(ts, with_date):
-    """Čas ponastavitve v lokalnem času: '22:10' ali '14. 10. 13:00'."""
+    """Reset time in local time: '22:10' or '14 Oct 13:00'."""
     try:
         t = datetime.fromtimestamp(float(ts))
     except (TypeError, ValueError, OSError):
         return ""
-    return t.strftime(f"{t.day}. {t.month}. %H:%M") if with_date else t.strftime("%H:%M")
+    return t.strftime(f"{t.day} %b %H:%M") if with_date else t.strftime("%H:%M")
 
 
 def usage_segment(data):
@@ -110,14 +110,14 @@ def usage_segment(data):
     if not isinstance(rl, dict):
         return ""
     parts = []
-    for key, label, with_date in (("five_hour", "Session", False), ("seven_day", "Teden", True)):
+    for key, label, with_date in (("five_hour", "Session (5 h)", False), ("seven_day", "Weekly", True)):
         lim = rl.get(key)
         if not isinstance(lim, dict) or lim.get("used_percentage") is None:
             continue
         pct = float(lim["used_percentage"])
         color = usage_color(pct)
         reset = format_reset(lim.get("resets_at"), with_date)
-        reset = f" {DIM}do {reset}{RESET}" if reset else ""
+        reset = f" {DIM}resets {reset}{RESET}" if reset else ""
         parts.append(
             f"{DIM}{label}{RESET} {progress_bar(pct, color, USAGE_BAR_WIDTH)} "
             f"{color}{pct:.0f}%{RESET}{reset}"
@@ -144,7 +144,7 @@ def main():
     else:
         color = GREEN
 
-    line = f"{progress_bar(pct, color)} {color}{pct:.1f}%{RESET}"
+    line = f"{DIM}Context{RESET} {progress_bar(pct, color)} {color}{pct:.1f}%{RESET}"
     usage = usage_segment(data)
     if usage:
         line += f"  {DIM}│{RESET}  {usage}"
