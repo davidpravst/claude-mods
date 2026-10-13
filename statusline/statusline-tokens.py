@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Claude Code status line: session token usage as % of 1M context.
 
-Green < 33%  |  Orange 33-50%  |  Red > 50%
+Green < 35%  |  Orange 35-50%  |  Red > 50%
 
 Prefers the `context_window` block from the status-line stdin JSON (Claude Code
 >= ~2.1). Falls back to parsing the transcript for older versions.
@@ -96,7 +96,7 @@ def main():
 
     if pct > 50:
         color = RED
-    elif pct >= 33:
+    elif pct >= 35:
         color = ORANGE
     else:
         color = GREEN

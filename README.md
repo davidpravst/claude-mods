@@ -10,7 +10,7 @@ Progress bar iz kvadratkov, ki kaže, koliko konteksta pogovora (od 1M tokenov) 
 ■■■■■■■□□□□□□□□□□□□□ 35.6% (356,306 / 1M tokens)
 ```
 
-Barva: 🟢 < 33 % · 🟠 33–50 % · 🔴 > 50 %. En kvadratek = 5 %, natančna vrednost je v številki.
+Barva: 🟢 < 35 % · 🟠 35–50 % · 🔴 > 50 %. En kvadratek = 5 %, natančna vrednost je v številki.
 
 **Namestitev:**
 
