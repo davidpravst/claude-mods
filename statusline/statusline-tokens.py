@@ -76,19 +76,10 @@ BAR_WIDTH = 20
 
 
 def progress_bar(pct, color):
-    """Srednje debel progress bar (spodnja polovica znaka) s 1/2 natančnostjo."""
+    """Progress bar iz kvadratkov: polni ■ v barvi stanja, prazni □ zatemnjeni."""
     pct = max(0.0, min(pct, 100.0))
-    halves = round(pct / 100 * BAR_WIDTH * 2)
-    full, half = divmod(halves, 2)
-    cells = []
-    for i in range(BAR_WIDTH):
-        if i < full:
-            cells.append(f"{color}▄")
-        elif i == full and half:
-            cells.append(f"{color}▖")
-        else:
-            cells.append(f"{DIM}▄")
-    return "".join(cells) + RESET
+    full = round(pct / 100 * BAR_WIDTH)
+    return f"{color}{'■' * full}{RESET}{DIM}{'□' * (BAR_WIDTH - full)}{RESET}"
 
 
 def main():
