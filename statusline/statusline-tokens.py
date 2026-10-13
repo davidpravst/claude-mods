@@ -149,10 +149,9 @@ def main():
     usage = usage_segment(data)
     if usage:
         line += f"  {DIM}│{RESET}  {usage}"
-    # tanki zatemnjeni ločilni črti nad in pod vrstico, dolgi kot vrstica
+    # tanka zatemnjena ločilna črta pod vrstico, dolga kot vrstica
     width = len(re.sub(r"\033\[[0-9;]*m", "", line))
-    rule = f"{DIM}{'─' * width}{RESET}"
-    sys.stdout.write(f"{rule}\n{line}\n{rule}")
+    sys.stdout.write(f"{line}\n{DIM}{'─' * width}{RESET}")
 
 
 if __name__ == "__main__":
