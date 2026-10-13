@@ -144,10 +144,7 @@ def main():
     else:
         color = GREEN
 
-    line = (
-        f"{progress_bar(pct, color)} {color}{pct:.1f}%{RESET} "
-        f"{DIM}({tokens:,} / 1M tokens){RESET}"
-    )
+    line = f"{progress_bar(pct, color)} {color}{pct:.1f}%{RESET}"
     usage = usage_segment(data)
     if usage:
         line += f"  {DIM}│{RESET}  {usage}"
