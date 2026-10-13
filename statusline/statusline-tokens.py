@@ -8,6 +8,7 @@ Prefers the `context_window` block from the status-line stdin JSON (Claude Code
 """
 import sys
 import json
+from datetime import datetime
 
 MAX_TOKENS = 1_000_000
 
@@ -75,11 +76,53 @@ def tokens_from_transcript(transcript_path):
 BAR_WIDTH = 20
 
 
-def progress_bar(pct, color):
+USAGE_BAR_WIDTH = 10
+
+
+def progress_bar(pct, color, width=BAR_WIDTH):
     """Progress bar iz kvadratkov: polni ■ v barvi stanja, prazni □ zatemnjeni."""
     pct = max(0.0, min(pct, 100.0))
-    full = round(pct / 100 * BAR_WIDTH)
-    return f"{color}{'■' * full}{RESET}{DIM}{'□' * (BAR_WIDTH - full)}{RESET}"
+    full = round(pct / 100 * width)
+    return f"{color}{'■' * full}{RESET}{DIM}{'□' * (width - full)}{RESET}"
+
+
+def usage_color(pct):
+    """Poraba limita: zelena < 50 %, oranžna 50–80 %, rdeča > 80 %."""
+    if pct > 80:
+        return RED
+    if pct >= 50:
+        return ORANGE
+    return GREEN
+
+
+def format_reset(ts, with_date):
+    """Čas ponastavitve v lokalnem času: '22:10' ali '14. 10. 13:00'."""
+    try:
+        t = datetime.fromtimestamp(float(ts))
+    except (TypeError, ValueError, OSError):
+        return ""
+    return t.strftime(f"{t.day}. {t.month}. %H:%M") if with_date else t.strftime("%H:%M")
+
+
+def usage_segment(data):
+    """Session (5 h) in tedenska (7 dni) poraba iz `rate_limits`, če so podatki na voljo."""
+    rl = data.get("rate_limits")
+    if not isinstance(rl, dict):
+        return ""
+    parts = []
+    for key, label, with_date in (("five_hour", "Session", False), ("seven_day", "Teden", True)):
+        lim = rl.get(key)
+        if not isinstance(lim, dict) or lim.get("used_percentage") is None:
+            continue
+        pct = float(lim["used_percentage"])
+        color = usage_color(pct)
+        reset = format_reset(lim.get("resets_at"), with_date)
+        reset = f" {DIM}do {reset}{RESET}" if reset else ""
+        parts.append(
+            f"{DIM}{label}{RESET} {progress_bar(pct, color, USAGE_BAR_WIDTH)} "
+            f"{color}{pct:.0f}%{RESET}{reset}"
+        )
+    return f"  {DIM}│{RESET}  ".join(parts)
 
 
 def main():
@@ -101,10 +144,14 @@ def main():
     else:
         color = GREEN
 
-    sys.stdout.write(
+    line = (
         f"{progress_bar(pct, color)} {color}{pct:.1f}%{RESET} "
         f"{DIM}({tokens:,} / 1M tokens){RESET}"
     )
+    usage = usage_segment(data)
+    if usage:
+        line += f"  {DIM}│{RESET}  {usage}"
+    sys.stdout.write(line)
 
 
 if __name__ == "__main__":

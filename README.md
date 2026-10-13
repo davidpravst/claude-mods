@@ -7,10 +7,11 @@ Moji modi za Claude Code.
 Progress bar iz kvadratkov, ki kaže, koliko konteksta pogovora (od 1M tokenov) je porabljenega:
 
 ```
-■■■■■■■□□□□□□□□□□□□□ 35.6% (356,306 / 1M tokens)
+■■■■■■■□□□□□□□□□□□□□ 37.1% (370,837 / 1M tokens)  │  Session ■■■■■■□□□□ 59% do 22:10  │  Teden ■■■□□□□□□□ 33% do 14. 10. 13:00
 ```
 
-Barva: 🟢 < 35 % · 🟠 35–50 % · 🔴 > 50 %. En kvadratek = 5 %, natančna vrednost je v številki.
+- **Kontekst:** 🟢 < 35 % · 🟠 35–50 % · 🔴 > 50 %. En kvadratek = 5 %.
+- **Session (5 h) in Teden (7 dni):** poraba limita iz Claude Code (`rate_limits`), s časom ponastavitve. 🟢 < 50 % · 🟠 50–80 % · 🔴 > 80 %. En kvadratek = 10 %.
 
 **Namestitev:**
 
