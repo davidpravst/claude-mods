@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""Claude Code status line: session token usage as % of 1M context.
+"""Claude Code status line: context usage as % of 1M tokens, plus Session (5 h)
+and Weekly (7 day) rate-limit usage from `rate_limits`.
 
-Green < 35%  |  Orange 35-50%  |  Red > 50%
+Context:  green < 35%  |  orange 35-50%  |  red > 50%
+Limits:   green < 50%  |  orange 50-80%  |  red > 80%
 
 Prefers the `context_window` block from the status-line stdin JSON (Claude Code
 >= ~2.1). Falls back to parsing the transcript for older versions.

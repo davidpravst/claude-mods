@@ -1,10 +1,8 @@
 # Claude Mods
 
-Moji modi za Claude Code.
+## Status line — kontekst in poraba limitov (`statusline/`)
 
-## Status line — zasedenost konteksta (`statusline/`)
-
-Progress bar iz kvadratkov, ki kaže, koliko konteksta pogovora (od 1M tokenov) je porabljenega:
+Status line s progress bari iz kvadratkov: zasedenost konteksta pogovora (od 1M tokenov) ter poraba 5-urnega in tedenskega limita:
 
 ```
 Context ■■■■■■■□□□□□□□□□□□□□ 37.1%  │  Session (5 h) ■■■■■■□□□□ 59% resets 22:10  │  Weekly ■■■□□□□□□□ 33% resets 14 Oct 13:00
