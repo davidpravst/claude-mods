@@ -9,7 +9,6 @@ Context ■■■■■■■□□□□□□□□□□□□□ 37.1%  │ 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
-- Pod vrstico je tanka zatemnjena ločilna črta (Claude Code praznih vrstic ne prikaže).
 - **Context:** 🟢 < 35 % · 🟠 35–50 % · 🔴 > 50 %. En kvadratek = 5 %.
 - **Session (5 h) in Weekly (7 dni):** poraba limita iz Claude Code (`rate_limits`), s časom ponastavitve. 🟢 < 50 % · 🟠 50–80 % · 🔴 > 80 %. En kvadratek = 10 %.
 
