@@ -1,6 +1,6 @@
 # Claude Mods
 
-## Status line — kontekst in poraba limitov (`statusline/`)
+## Status line — kontekst in poraba limitov
 
 Status line s progress bari iz kvadratkov: zasedenost konteksta pogovora (od 1M tokenov) ter poraba 5-urnega in tedenskega limita:
 
