@@ -15,8 +15,8 @@ Context ■■■■■■■□□□□□□□□□□□□□ 37.1%  │ 
 **Namestitev:**
 
 ```bash
-gh repo clone davidpravst/claude-mods ~/Claude/claude-mods
-~/Claude/claude-mods/statusline/install.sh
+gh repo clone davidpravst/claude-mods ~/Projekti/Claude/claude-mods
+~/Projekti/Claude/claude-mods/statusline/install.sh
 ```
 
 Nato ponovno zaženi Claude Code (ali pošlji naslednje sporočilo).
